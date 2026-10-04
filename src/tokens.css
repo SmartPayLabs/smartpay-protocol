@@ -1,0 +1,92 @@
+/* PALETTE — SAMPLED from the real assets in brand/ and reference/.
+   Method: stride-6 sample of every opaque pixel in all 10 files, k-means (K=6, farthest-point init,
+   25 iterations, RGB), each centroid snapped to the nearest real pixel. Minor ink tones were read as the
+   modal colour of a text box. Third-party brand colours that surfaced in the k-means (red, green, blue
+   service logos on the cover image, each under 0.1% of pixels) are not SmartPay colours and are excluded.
+   Provenance — colour (file, x,y of the snapped pixel):
+     #c8b6d0 lavender  brand/LOGO SMARTPAY JPG (0,0)          k-means share 81.6%
+     #241b2c plum      brand/LOGO SMARTPAY JPG (846,828)      k-means share 17.6%
+     #2b1838 ink       reference/SMARTPAY 1 (523,341)         modal colour of the title text box
+     #645471 mid plum  reference/SMARTPAY 3 (204,384)         k-means share 0.7%
+     #beabc9 tint      reference/SMARTPAY 1 (1450,800)        modal colour of the corner circle
+     #fefefe white     brand/LOGO SMARTPAY JPG (1031,983)     glyph pixel
+   Every other tone below is color-mix() of those six, so no new literal enters the system.
+   This is the only file allowed to hold color literals. */
+:root {
+  --p-lavender: #c8b6d0;
+  --p-plum: #241b2c;
+  --p-ink: #2b1838;
+  --p-mid: #645471;
+  --p-tint: #beabc9;
+  --p-white: #fefefe;
+
+  /* light theme (default) */
+  --c-bg: var(--p-lavender);
+  --c-bg-2: color-mix(in oklab, var(--p-lavender) 55%, var(--p-white));
+  --c-surface: color-mix(in srgb, var(--p-white) 52%, transparent);
+  --c-surface-solid: var(--p-white);
+  --c-surface-2: var(--p-tint);
+  --c-ink: var(--p-ink);
+  --c-ink-2: var(--p-mid);
+  --c-line: color-mix(in srgb, var(--p-plum) 14%, transparent);
+  --c-hi: color-mix(in srgb, var(--p-white) 70%, transparent);
+  --c-inverse: var(--p-plum);
+  --c-on-inverse: var(--p-white);
+  --c-flash: color-mix(in oklab, var(--p-tint) 80%, var(--p-white));
+  --c-shadow: color-mix(in srgb, var(--p-plum) 26%, transparent);
+  --c-glow-a: color-mix(in oklab, var(--p-lavender) 45%, var(--p-white));
+  --c-glow-b: var(--p-tint);
+  --c-glow-c: color-mix(in oklab, var(--p-mid) 45%, var(--p-lavender));
+  --c-grad-a: var(--p-ink);
+  --c-grad-b: var(--p-mid);
+
+  --r-card: 28px;
+  --r-pill: 999px;
+  --t-fast: 160ms;
+  --t-med: 600ms;
+  --ease: cubic-bezier(.2,.7,.2,1);
+}
+
+:root[data-theme="dark"] {
+  --c-bg: var(--p-plum);
+  --c-bg-2: color-mix(in oklab, var(--p-plum) 82%, var(--p-mid));
+  --c-surface: color-mix(in srgb, var(--p-white) 7%, transparent);
+  --c-surface-solid: color-mix(in oklab, var(--p-plum) 80%, var(--p-mid));
+  --c-surface-2: color-mix(in oklab, var(--p-plum) 70%, var(--p-mid));
+  --c-ink: color-mix(in oklab, var(--p-white) 94%, var(--p-lavender));
+  --c-ink-2: color-mix(in oklab, var(--p-lavender) 88%, var(--p-plum));
+  --c-line: color-mix(in srgb, var(--p-white) 14%, transparent);
+  --c-hi: color-mix(in srgb, var(--p-white) 14%, transparent);
+  --c-inverse: var(--p-lavender);
+  --c-on-inverse: var(--p-plum);
+  --c-flash: color-mix(in oklab, var(--p-mid) 70%, var(--p-plum));
+  --c-shadow: color-mix(in srgb, var(--p-plum) 80%, transparent);
+  --c-glow-a: color-mix(in oklab, var(--p-mid) 70%, var(--p-plum));
+  --c-glow-b: color-mix(in oklab, var(--p-ink) 80%, var(--p-mid));
+  --c-glow-c: color-mix(in oklab, var(--p-lavender) 35%, var(--p-plum));
+  --c-grad-a: var(--p-white);
+  --c-grad-b: var(--p-lavender);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --c-bg: var(--p-plum);
+    --c-bg-2: color-mix(in oklab, var(--p-plum) 82%, var(--p-mid));
+    --c-surface: color-mix(in srgb, var(--p-white) 7%, transparent);
+    --c-surface-solid: color-mix(in oklab, var(--p-plum) 80%, var(--p-mid));
+    --c-surface-2: color-mix(in oklab, var(--p-plum) 70%, var(--p-mid));
+    --c-ink: color-mix(in oklab, var(--p-white) 94%, var(--p-lavender));
+    --c-ink-2: color-mix(in oklab, var(--p-lavender) 88%, var(--p-plum));
+    --c-line: color-mix(in srgb, var(--p-white) 14%, transparent);
+    --c-hi: color-mix(in srgb, var(--p-white) 14%, transparent);
+    --c-inverse: var(--p-lavender);
+    --c-on-inverse: var(--p-plum);
+    --c-flash: color-mix(in oklab, var(--p-mid) 70%, var(--p-plum));
+    --c-shadow: color-mix(in srgb, var(--p-plum) 80%, transparent);
+    --c-glow-a: color-mix(in oklab, var(--p-mid) 70%, var(--p-plum));
+    --c-glow-b: color-mix(in oklab, var(--p-ink) 80%, var(--p-mid));
+    --c-glow-c: color-mix(in oklab, var(--p-lavender) 35%, var(--p-plum));
+    --c-grad-a: var(--p-white);
+    --c-grad-b: var(--p-lavender);
+  }
+}

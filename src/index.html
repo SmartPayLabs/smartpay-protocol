@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SmartPay</title>
+<meta name="description" content="SmartPay settles everyday purchases from one onchain balance, on Robinhood Chain.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="styles.css">
+<script>try{var t=localStorage.getItem('sp-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+<a class="skip" href="#top">Skip to content</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header class="top">
+  <div class="top-row">
+    <a class="brand" href="#top" aria-label="SmartPay home"><img src="favicon.svg" width="36" height="36" alt=""><span class="brand-name">SmartPay</span></a>
+    <span class="pill" id="pill" role="status"><i class="dot" aria-hidden="true"></i><span id="pill-text">Connecting</span></span>
+    <button class="icon" id="theme" type="button" aria-pressed="false" aria-label="Switch to dark mode">
+      <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
+      <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+    </button>
+    <nav class="socials" aria-label="Social links" id="socials"></nav>
+  </div>
+  <div class="ca" id="ca"></div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="mesh" aria-hidden="true"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow reveal" style="--i:0">Live on Robinhood Chain</p>
+        <h1 class="reveal" style="--i:1">Tap once.<br><span class="thin">Be done.</span></h1>
+        <p class="lede reveal" style="--i:2">A single onchain balance can cover streaming plans, rides, dinners, game top-ups and flights. Every receipt is confirmed by the chain itself, so there is nothing to chase afterwards.</p>
+        <div class="btnrow reveal" style="--i:3">
+          <a class="btn" href="#live">See live stats</a>
+          <a class="btn ghost" href="#demo">Try the demo</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="tix t1" data-depth="-0.10"><div class="tix-in"><b>Streaming</b><span>Monthly plan</span></div></div>
+        <div class="tix t2" data-depth="0.14"><div class="tix-in"><b>Flights</b><span>Seat 14A</span></div></div>
+        <div class="hcard-wrap" data-depth="0.06">
+          <div class="hcard glass">
+            <div class="hc-top"><span>Receipt</span><em>Illustrative</em></div>
+            <div class="hc-amt">$12.40</div>
+            <div class="hc-row"><span>Merchant</span><b>Corner Cafe</b></div>
+            <div class="hc-row"><span>Status</span><b class="ok"><i></i>Confirmed</b></div>
+            <div class="hc-bar"><span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="marq-sec" aria-labelledby="marq-h">
+    <div class="marq-head">
+      <h2 id="marq-h" class="mini">Tokens indexed on Robinhood Chain</h2>
+      <button class="retry" type="button" data-retry="pairs" hidden>Retry</button>
+    </div>
+    <div class="marquee" id="marquee" aria-live="off"><div class="chips"><span class="skel chip-sk"></span><span class="skel chip-sk"></span><span class="skel chip-sk"></span></div></div>
+  </section>
+
+  <section class="block" id="live" aria-labelledby="live-h">
+    <h2 id="live-h" class="reveal">Network, right now</h2>
+    <div class="grid" id="stats">
+      <article class="card glass reveal" style="--i:0"><h3>Chain TVL</h3><p class="num" data-k="tvl"><span class="skel"></span></p><p class="sub" data-sub="tvl">via DefiLlama</p></article>
+      <article class="card glass reveal" style="--i:1"><h3>Latest block</h3><p class="num" data-k="block"><span class="skel"></span></p><p class="sub" data-sub="block">via chain RPC</p></article>
+      <article class="card glass reveal" style="--i:2"><h3>Gas price</h3><p class="num" data-k="gas"><span class="skel"></span></p><p class="sub" data-sub="gas">gwei, via chain RPC</p></article>
+      <article class="card glass reveal" style="--i:3"><h3>Trading pairs</h3><p class="num" data-k="pairs"><span class="skel"></span></p><p class="sub" data-sub="pairs">via DexScreener</p></article>
+    </div>
+  </section>
+
+  <section class="block two" aria-label="Signals">
+    <article class="glass panel reveal" style="--i:0">
+      <div class="panel-head"><h3>Value locked, last 90 days</h3><button class="retry" type="button" data-retry="tvl" hidden>Retry</button></div>
+      <p class="readout" id="spark-read" aria-live="polite"><span class="skel"></span></p>
+      <div class="spark" id="spark" tabindex="0" role="group" aria-label="Value locked chart. Use left and right arrow keys to read each day."><span class="skel spark-sk"></span></div>
+      <p class="hint">Hover, tap or press the arrow keys to read a day.</p>
+    </article>
+    <article class="glass panel reveal" style="--i:1">
+      <div class="panel-head"><h3>Chain health</h3><button class="retry" type="button" data-retry="rpc" hidden>Retry</button></div>
+      <dl class="health" id="health">
+        <div><dt>Status</dt><dd data-h="status"><span class="skel"></span></dd></div>
+        <div><dt>Latency</dt><dd data-h="latency"><span class="skel"></span></dd></div>
+        <div><dt>Block time</dt><dd data-h="blocktime"><span class="skel"></span></dd></div>
+        <div><dt>Chain id</dt><dd data-h="chainid">4663</dd></div>
+      </dl>
+      <button class="btn small" id="copy-rpc" type="button">Copy RPC URL</button>
+    </article>
+  </section>
+
+  <section class="block two" aria-label="Markets and demo">
+    <article class="glass panel reveal" style="--i:0">
+      <div class="panel-head"><h3>Top pairs</h3><button class="retry" type="button" data-retry="pairs" hidden>Retry</button></div>
+      <p class="hint flush">Ranked by liquidity</p>
+      <ul class="pairs" id="pairs"><li class="pair-sk"><span class="skel"></span></li><li class="pair-sk"><span class="skel"></span></li><li class="pair-sk"><span class="skel"></span></li></ul>
+    </article>
+    <article class="glass panel sim reveal" id="demo" style="--i:1">
+      <div class="panel-head"><h3>Send, rehearsed</h3><span class="tag">Demo</span></div>
+      <p class="hint flush">Demo only. No wallet connects and no funds move.</p>
+      <div class="amounts" role="group" aria-label="Sample amount">
+        <button type="button" data-amt="5.00" aria-pressed="false">$5</button>
+        <button type="button" data-amt="12.40" aria-pressed="true">$12.40</button>
+        <button type="button" data-amt="25.00" aria-pressed="false">$25</button>
+      </div>
+      <ol class="steps" id="steps">
+        <li><i></i><span>Quote locked</span></li>
+        <li><i></i><span>Approve (simulated)</span></li>
+        <li><i></i><span>Receipt written</span></li>
+      </ol>
+      <p class="sim-out" id="sim-out" aria-live="polite">Pick a sample amount and run it.</p>
+      <button class="btn" id="sim-run" type="button">Run demo</button>
+    </article>
+  </section>
+
+  <section class="block" aria-labelledby="how-h">
+    <h2 id="how-h" class="reveal">Three moves</h2>
+    <div class="grid three">
+      <article class="ticket glass reveal" style="--i:0"><span class="step">01</span><h3>Fund</h3><p>Load the balance once from a wallet you already hold. No wrapping, no extra accounts.</p></article>
+      <article class="ticket glass reveal" style="--i:1"><span class="step">02</span><h3>Scan</h3><p>Aim at a QR code or open a booking link. The full total appears before anything moves.</p></article>
+      <article class="ticket glass reveal" style="--i:2"><span class="step">03</span><h3>Settled</h3><p>The merchant is credited and a verified receipt is written to the chain within seconds.</p></article>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="cover-h">
+    <h2 id="cover-h" class="reveal">Where the balance goes</h2>
+    <div class="grid three">
+      <article class="ticket glass reveal" style="--i:0"><h3>Streaming</h3><p>Monthly plans renew from the balance, with a receipt for each cycle.</p></article>
+      <article class="ticket glass reveal" style="--i:1"><h3>Rides</h3><p>Hail a car and settle at the curb, no card tucked behind a screen.</p></article>
+      <article class="ticket glass reveal" style="--i:2"><h3>Dinner</h3><p>Split a table or order in, then close the check from the same place.</p></article>
+      <article class="ticket glass reveal" style="--i:0"><h3>Games</h3><p>Top up a console or a mobile title in one confirmation.</p></article>
+      <article class="ticket glass reveal" style="--i:1"><h3>Flights</h3><p>Book the seat and watch the fare lock in before you commit.</p></article>
+      <article class="ticket glass reveal" style="--i:2"><h3>Stays</h3><p>Reserve a room abroad without juggling currencies at the desk.</p></article>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span id="foot-domain"></span>
+  <a class="btn" href="#top">Back to top</a>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script type="module" src="main.js"></script>
+</body>
+</html>
